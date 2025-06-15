@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline'" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>MetaMask File Editor</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body class="bg-gray-950 text-gray-300 font-sans">
+  <div id="app" class="container mx-auto p-4 md:p-8 max-w-3xl">
+
+    <!-- Login View -->
+    <div id="login-view" class="text-center flex flex-col items-center bg-gray-900 p-10 w-max mx-auto">
+      <svg class="w-16 h-16 text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+      </svg>
+      <h1 class="text-4xl font-bold text-white mt-10">File Editor</h1>
+      <p class="text-gray-400 mb-8 max-w-sm">Please sign in with your Ethereum wallet to continue.</p>
+      <button id="login-button" class="inline-flex items-center gap-x-3 bg-white hover:bg-gray-200 text-black text-xs font-semibold py-3 px-6">Sign In with MetaMask</button>
+      <p id="login-status" class="status mt-6 text-gray-500 min-h-[24px]"></p>
+    </div>
+
+    <!-- Main Application View -->
+    <div id="main-view" class="hidden space-y-[50px]">
+      <div class="header flex justify-between items-end">
+        <div>
+          <p class="text-sm text-gray-50 mb-1">Your wallet</p>
+          <p id="wallet-address" class="address font-mono text-sm bg-gray-800 px-3 py-1"></p>
+        </div>
+        <button id="logout-button" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold text-xs py-2 px-4">Logout</button>
+      </div>
+
+      <div id="folder-selection" class="card bg-gray-900 p-6 border border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h2 id="folder-path" class="font-mono text-gray-400 text-sm break-all">No folder selected</h2>
+        <button id="select-folder-button"
+          class="bg-gray-200 hover:bg-white text-black font-semibold text-xs py-2 px-4">Choose
+          Folder</button>
+      </div>
+
+      <div id="file-editor"
+        class="card hidden bg-gray-900 p-6 border border-gray-800 flex flex-col md:flex-row gap-6">
+        <div
+          class="file-list-container md:w-1/3 pb-6 md:pb-0 md:pr-6">
+          <h3 class="text-lg font-semibold text-white mb-4">Files</h3>
+          <ul id="file-list" class="space-y-2">
+            <!-- File items will be populated here -->
+          </ul>
+        </div>
+        <div class="file-content-container md:w-2/3 flex flex-col gap-4">
+          <input type="text" id="filename-input" placeholder="new-file.txt"
+            class="bg-gray-950 border-2 border-gray-800 p-3 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none transition" />
+          <textarea id="content-textarea" placeholder="Enter file content..."
+            class="flex-grow bg-gray-950 border-2 border-gray-800 p-3 h-64 md:h-auto resize-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none transition"></textarea>
+          <div class="button-group flex justify-between items-center">
+            <button id="save-button"
+              class="bg-gray-200 hover:bg-white text-black font-semibold py-2 px-5 transition-colors">Save
+              File</button>
+            <p id="save-status" class="status text-sm min-h-[20px]"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
